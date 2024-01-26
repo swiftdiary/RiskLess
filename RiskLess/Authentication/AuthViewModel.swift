@@ -11,9 +11,12 @@ final class AuthViewModel: ObservableObject {
     @Published var isAuthenticated: Bool = false
     @Published var emailTextField: String = ""
     @Published var passwordTextField: String = ""
+    @Published var showSignInView: Bool = false
     
-    func signUp() {
-        
+    func signUp() async throws {
+        await MainActor.run {
+            self.showSignInView = true
+        }
     }
     
     func signIn() async throws {

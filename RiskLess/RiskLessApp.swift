@@ -10,14 +10,25 @@ import SwiftUI
 @main
 struct RiskLessApp: App {
     @AppStorage("is_signed_in") private var isSignedIn: Bool = false
+    @AppStorage("is_quiz_passed") private var isQuizPassed: Bool = false
     
     var body: some Scene {
         WindowGroup {
-            if isSignedIn {
-                ContentView()
-            } else {
-                AuthView()
+            Group {
+                if isSignedIn {
+                    if isQuizPassed {
+                        ContentView()
+                    } else {
+                        QuizView()
+                    }
+                } else {
+                    AuthView()
+                }
             }
+            .onAppear(perform: {
+                isSignedIn = false
+                isQuizPassed = false
+            })
         }
     }
 }
