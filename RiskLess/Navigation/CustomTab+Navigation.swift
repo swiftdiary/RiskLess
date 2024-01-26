@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  CustomTab+Navigation.swift
 //  RiskLess
 //
 //  Created by Akbar Khusanbaev on 26/01/24.
@@ -7,15 +7,12 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct CustomTab_Navigation: View {
     var body: some View {
-        VStack {
-            
-        }
-        .padding()
+        Text("Hello, World!")
     }
 }
 
 #Preview {
-    ContentView()
+    CustomTab_Navigation()
 }

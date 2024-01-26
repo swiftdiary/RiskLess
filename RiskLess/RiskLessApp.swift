@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct RiskLessApp: App {
+    @AppStorage("is_signed_in") private var isSignedIn: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isSignedIn {
+                ContentView()
+            } else {
+                AuthView()
+            }
         }
     }
 }
