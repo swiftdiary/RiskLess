@@ -25,6 +25,8 @@
 		CAAA326A2B64276800469D32 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA32692B64276800469D32 /* HomeViewModel.swift */; };
 		CAAA326C2B64278500469D32 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA326B2B64278500469D32 /* FavoritesViewModel.swift */; };
 		CAAA326E2B64279300469D32 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA326D2B64279300469D32 /* ProfileViewModel.swift */; };
+		CAAA32712B643EA700469D32 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA32702B643EA700469D32 /* CategoriesViewModel.swift */; };
+		CAAA32732B643EC800469D32 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA32722B643EC800469D32 /* CategoriesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		CAAA32692B64276800469D32 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CAAA326B2B64278500469D32 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		CAAA326D2B64279300469D32 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		CAAA32702B643EA700469D32 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
+		CAAA32722B643EC800469D32 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +85,11 @@
 			children = (
 				CA7924752B63C42500EA32A9 /* RiskLessApp.swift */,
 				CA7924772B63C42500EA32A9 /* ContentView.swift */,
-				CAAA32642B64108D00469D32 /* Quiz */,
+				CAAA326F2B643E9400469D32 /* Categories */,
 				CAAA32612B6408AD00469D32 /* Profile */,
 				CAAA325E2B6408A000469D32 /* Favorites */,
 				CAAA325B2B64088C00469D32 /* Home */,
+				CAAA32642B64108D00469D32 /* Quiz */,
 				CA7924872B63D88800EA32A9 /* Authentication */,
 				CA7924842B63D3F300EA32A9 /* Utils */,
 				CA7924832B63D3E700EA32A9 /* Navigation */,
@@ -163,6 +168,15 @@
 				CAAA32672B6410DD00469D32 /* QuizViewModel.swift */,
 			);
 			path = Quiz;
+			sourceTree = "<group>";
+		};
+		CAAA326F2B643E9400469D32 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				CAAA32722B643EC800469D32 /* CategoriesView.swift */,
+				CAAA32702B643EA700469D32 /* CategoriesViewModel.swift */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,9 +259,11 @@
 				CA79248B2B63D8E400EA32A9 /* AuthViewModel.swift in Sources */,
 				CA7924782B63C42500EA32A9 /* ContentView.swift in Sources */,
 				CA7924762B63C42500EA32A9 /* RiskLessApp.swift in Sources */,
+				CAAA32712B643EA700469D32 /* CategoriesViewModel.swift in Sources */,
 				CAAA326A2B64276800469D32 /* HomeViewModel.swift in Sources */,
 				CA7924892B63D89D00EA32A9 /* AuthView.swift in Sources */,
 				CAAA32632B6408B500469D32 /* ProfileView.swift in Sources */,
+				CAAA32732B643EC800469D32 /* CategoriesView.swift in Sources */,
 				CA7924862B63D3FE00EA32A9 /* Utils.swift in Sources */,
 				CAAA326E2B64279300469D32 /* ProfileViewModel.swift in Sources */,
 				CAAA32682B6410DD00469D32 /* QuizViewModel.swift in Sources */,

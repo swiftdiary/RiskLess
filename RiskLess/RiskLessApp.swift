@@ -26,8 +26,8 @@ struct RiskLessApp: App {
                 }
             }
             .onAppear(perform: {
-                isSignedIn = false
-                isQuizPassed = false
+//                isSignedIn = false
+//                isQuizPassed = false
             })
         }
     }
