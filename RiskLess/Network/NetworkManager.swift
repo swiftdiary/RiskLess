@@ -9,17 +9,26 @@ import Foundation
 
 final class NetworkManager {
     static let shared = NetworkManager()
-    static let baseURL = "https://riskless.onrender.com"
+    static let baseURL = "https://riskless.lm.r.appspot.com"
+    private let userDefaults = UserDefaults.standard
     private init() { }
     
-    func createURL(path: String, queries: [String: String]?) -> URL {
+    private var defaultHeaders: [String: String] {
+        var headers: [String: String] = [:]
+        if let token = userDefaults.string(forKey: "sign_in_token"), !token.isEmpty {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        return headers
+    }
+    
+    private func createURL(path: String, queries: [String: String]?) -> URL {
         var components = URLComponents(string: Self.baseURL)!
         components.path = path
         components.queryItems = queries?.map({ URLQueryItem(name: $0.key, value: $0.value) })
         return components.url!
     }
     
-    func createRequest(url: URL, method: String, jsonBody: [String: Any]? = nil) -> URLRequest {
+    private func createRequest(url: URL, method: String, jsonBody: [String: Any]? = nil) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method
         
@@ -31,18 +40,26 @@ final class NetworkManager {
             }
         }
         
+        defaultHeaders.forEach { key, value in
+            request.addValue(value, forHTTPHeaderField: key)
+        }
+        
         return request
     }
     
-    func configureRequest<T: Decodable>(request: inout URLRequest, asType: T.Type?) {
+    private func configureRequest<T: Decodable>(request: inout URLRequest, asType: T.Type?) {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let responseType = asType {
+        if asType != nil {
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
+        
+        defaultHeaders.forEach { key, value in
+            request.addValue(value, forHTTPHeaderField: key)
+        }
     }
     
-    func handleResponse<T: Decodable>(data: Data?, response: URLResponse?, error: Error?, asType: T.Type?) throws -> T {
+    private func handleResponse<T: Decodable>(data: Data?, response: URLResponse?, error: Error?, asType: T.Type?) throws -> T {
         if let error = error {
             throw error
         }
@@ -71,7 +88,7 @@ final class NetworkManager {
         }
     }
     
-    func performRequest<T: Decodable>(path: String, queries: [String: String]?, method: String, jsonBody: [String: Any]? = nil, asType: T.Type?) async throws -> T {
+    private func performRequest<T: Decodable>(path: String, queries: [String: String]?, method: String, jsonBody: [String: Any]? = nil, asType: T.Type?) async throws -> T {
         let url = createURL(path: path, queries: queries)
         var request = createRequest(url: url, method: method, jsonBody: jsonBody)
         configureRequest(request: &request, asType: asType)

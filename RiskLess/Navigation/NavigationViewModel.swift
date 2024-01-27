@@ -26,13 +26,16 @@ final class NavigationViewModel: ObservableObject {
 }
 
 enum NavigationOption: Hashable {
-    case details
+    case details(String)
+    case categories(String)
     
     @ViewBuilder
     var destination: some View {
         switch self {
-        case .details:
-            DetailsView()
+        case .details(let ticker):
+            DetailsView(ticker: ticker)
+        case .categories(let name):
+            CategoriesView(categoryName: name)
         }
     }
 }

@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct SignInView: View {
+    @Binding var isSignIn: Bool
+    
     @FocusState private var initialEmailText: Bool
-    @Environment(\.dismiss) var dismiss
-    @EnvironmentObject private var authVM: AuthViewModel
+    @AppStorage("sign_in_token") private var signInToken: String = ""
+    @AppStorage("is_signed_in") private var isSignedIn: Bool = false
+    @StateObject private var authVM: AuthViewModel = AuthViewModel()
     
     var body: some View {
-        VStack {
+        ScrollView {
             Text("Sign In")
                 .font(.largeTitle.bold())
             Group {
@@ -40,7 +43,8 @@ struct SignInView: View {
             Button(action: {
                 Task {
                     do {
-                        try await authVM.signIn()
+                        signInToken = try await authVM.signIn()
+                        isSignedIn = true
                     } catch {
                         print(error)
                     }
@@ -57,13 +61,16 @@ struct SignInView: View {
                     )
             })
             .padding()
-            Spacer()
-        }
-        .onChange(of: authVM.isAuthenticated, perform: { newValue in
-            if newValue == true {
-                dismiss()
+            HStack {
+                Text("Don't have an account?")
+                Button(action: {
+                    isSignIn = false
+                }, label: {
+                    Text("Sign Up")
+                })
             }
-        })
+        }
+        .scrollDismissesKeyboard(.immediately)
         .onAppear(perform: {
             initialEmailText = true
         })
@@ -71,5 +78,5 @@ struct SignInView: View {
 }
 
 #Preview {
-    SignInView().environmentObject(AuthViewModel())
+    SignInView(isSignIn: .constant(true)).environmentObject(AuthViewModel())
 }

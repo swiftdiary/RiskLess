@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @AppStorage("is_signed_in") private var isSignedIn: Bool = false
-    @AppStorage("is_quiz_passed") private var isQuizPassed: Bool = false
+    @AppStorage("sign_in_token") private var signInToken: String = ""
     @AppStorage("is_premium") private var isPremium: Bool = false
     @State private var showPaywall: Bool = false
     
@@ -18,22 +18,19 @@ struct ProfileView: View {
     var body: some View {
         VStack {
             List {
-                Section("Edit") {
-                    HStack {
-                        Text("Name:")
-                        Text("Akbar")
-                            .font(.headline)
-                    }
+                Section("Info") {
                     Button("👑 Premium") {
                         if !isPremium {
                             showPaywall.toggle()
                         }
                     }
+                    Text("Terms of Use")
+                    Text("Privacy Policy")
                 }
                 Section {
                     Button(action: {
                         isSignedIn = false
-                        isQuizPassed = false
+                        signInToken = ""
                     }, label: {
                         Text("Sign Out")
                     })

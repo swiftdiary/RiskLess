@@ -20,6 +20,7 @@ struct OrganizationData: Identifiable, Codable {
     var email: String
     var phone: String
     var shortName: String
+    var ticker: String
     
     enum CodingKeys: String, CodingKey {
         case id = "org_id"
@@ -28,6 +29,7 @@ struct OrganizationData: Identifiable, Codable {
         case email
         case phone
         case shortName = "short_name"
+        case ticker
     }
     
     init(from decoder: Decoder) throws {
@@ -38,6 +40,7 @@ struct OrganizationData: Identifiable, Codable {
         self.email = try values.decode(String.self, forKey: .email)
         self.phone = try values.decode(String.self, forKey: .phone)
         self.shortName = try values.decode(String.self, forKey: .shortName)
+        self.ticker = try values.decode(String.self, forKey: .ticker)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -48,6 +51,7 @@ struct OrganizationData: Identifiable, Codable {
         try container.encode(self.email, forKey: .email)
         try container.encode(self.phone, forKey: .phone)
         try container.encode(self.shortName, forKey: .shortName)
+        try container.encode(self.ticker, forKey: .ticker)
     }
     
 }

@@ -8,23 +8,72 @@
 import SwiftUI
 
 struct CategoriesView: View {
-    @StateObject private var categroriesVM = CategoriesViewModel()
+    @StateObject private var categoriesVM = CategoriesViewModel()
+    let categoryName: String
     
     var body: some View {
         VStack {
-            // Here bill be as list of all items
-            List {
-                Text("HEHEHE")
+            List(categoriesVM.organizations) { org in
+                OrganizationRow(organization: org)
+                    .listRowSeparator(.hidden)
+            }
+            .listStyle(.inset)
+        }
+        .task {
+            do {
+                try await categoriesVM.getOrganizations(categoryName: categoryName)
+            } catch {
+                print(error)
             }
         }
-        .navigationBarBackButtonHidden()
-        .navigationTitle("Category name")
+        .navigationTitle("\(categoryName.capitalized)")
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    @ViewBuilder
+    func OrganizationRow(organization: OrganizationData) -> some View {
+        NavigationLink(value: NavigationOption.details(organization.ticker)) {
+            HStack {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(organization.shortName)
+                        .font(.headline)
+                    Text("\(organization.address), \(organization.email), \(organization.phone)")
+                        .font(.caption)
+                    Text("Director: \(organization.director)")
+                        .font(.headline)
+                }
+                Spacer()
+                Button {
+                    
+                } label: {
+                    Image(systemName: "star")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .font(.headline)
+                        .padding(6)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10.0)
+                                .fill(Color.accentColor.opacity(0.25))
+                        )
+                }
+                .foregroundStyle(.accent)
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 10.0)
+                    .stroke(lineWidth: 0.2)
+                    .foregroundStyle(.primary)
+            )
+            .padding(.horizontal, 10)
+            .padding(.vertical, 5)
+            .shadow(radius: 5.0)
+        }
     }
 }
 
 #Preview {
     NavigationStack {
-        CategoriesView()
+        CategoriesView(categoryName: "banks")
     }
 }

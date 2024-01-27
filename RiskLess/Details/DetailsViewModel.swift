@@ -9,4 +9,8 @@ import Foundation
 
 final class DetailsViewModel: ObservableObject {
     
+    
+    func getOrganization(ticker: String) async throws {
+        let response = try await NetworkManager.shared.get("organisations/\(ticker)", asType: nil)
+    }
 }

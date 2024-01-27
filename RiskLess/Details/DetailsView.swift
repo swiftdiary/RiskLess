@@ -10,6 +10,8 @@ import SwiftUI
 struct DetailsView: View {
     @StateObject private var detailsVM = DetailsViewModel()
     
+    let ticker: String
+    
     var body: some View {
         VStack {
             ScrollView {
@@ -17,7 +19,7 @@ struct DetailsView: View {
                 BodySection()
             }
         }
-        .navigationBarBackButtonHidden()
+        
         .navigationTitle("Details")
     }
     
@@ -57,6 +59,6 @@ struct DetailsView: View {
 
 #Preview {
     NavigationStack {
-        DetailsView()
+        DetailsView(ticker: "1")
     }
 }
