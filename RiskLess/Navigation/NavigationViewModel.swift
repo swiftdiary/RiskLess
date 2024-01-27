@@ -32,7 +32,7 @@ enum NavigationOption: Hashable {
     var destination: some View {
         switch self {
         case .details:
-            Text("Details")
+            DetailsView()
         }
     }
 }

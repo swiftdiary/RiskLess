@@ -16,6 +16,9 @@
 		CA79248B2B63D8E400EA32A9 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA79248A2B63D8E400EA32A9 /* AuthViewModel.swift */; };
 		CA79248D2B63D94B00EA32A9 /* CustomTab+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA79248C2B63D94B00EA32A9 /* CustomTab+Navigation.swift */; };
 		CA79248F2B63DD4000EA32A9 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA79248E2B63DD4000EA32A9 /* SignInView.swift */; };
+		CA7DBC822B64C749007E2B41 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7DBC812B64C749007E2B41 /* DetailsView.swift */; };
+		CA7DBC842B64C754007E2B41 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7DBC832B64C754007E2B41 /* DetailsViewModel.swift */; };
+		CA7DBC872B64E43B007E2B41 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7DBC862B64E43B007E2B41 /* NetworkManager.swift */; };
 		CAAA325A2B63FF9E00469D32 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA32592B63FF9E00469D32 /* NavigationViewModel.swift */; };
 		CAAA325D2B64089800469D32 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA325C2B64089800469D32 /* HomeView.swift */; };
 		CAAA32602B6408AB00469D32 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA325F2B6408AB00469D32 /* FavoritesView.swift */; };
@@ -40,6 +43,9 @@
 		CA79248A2B63D8E400EA32A9 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		CA79248C2B63D94B00EA32A9 /* CustomTab+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomTab+Navigation.swift"; sourceTree = "<group>"; };
 		CA79248E2B63DD4000EA32A9 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		CA7DBC812B64C749007E2B41 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		CA7DBC832B64C754007E2B41 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		CA7DBC862B64E43B007E2B41 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CAAA32592B63FF9E00469D32 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CAAA325C2B64089800469D32 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CAAA325F2B6408AB00469D32 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
@@ -85,6 +91,8 @@
 			children = (
 				CA7924752B63C42500EA32A9 /* RiskLessApp.swift */,
 				CA7924772B63C42500EA32A9 /* ContentView.swift */,
+				CA7DBC852B64E42F007E2B41 /* Network */,
+				CA7DBC802B64C73C007E2B41 /* Details */,
 				CAAA326F2B643E9400469D32 /* Categories */,
 				CAAA32612B6408AD00469D32 /* Profile */,
 				CAAA325E2B6408A000469D32 /* Favorites */,
@@ -132,6 +140,23 @@
 				CA79248A2B63D8E400EA32A9 /* AuthViewModel.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		CA7DBC802B64C73C007E2B41 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				CA7DBC812B64C749007E2B41 /* DetailsView.swift */,
+				CA7DBC832B64C754007E2B41 /* DetailsViewModel.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		CA7DBC852B64E42F007E2B41 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CA7DBC862B64E43B007E2B41 /* NetworkManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		CAAA325B2B64088C00469D32 /* Home */ = {
@@ -250,11 +275,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAAA326C2B64278500469D32 /* FavoritesViewModel.swift in Sources */,
+				CA7DBC822B64C749007E2B41 /* DetailsView.swift in Sources */,
 				CAAA32602B6408AB00469D32 /* FavoritesView.swift in Sources */,
+				CA7DBC872B64E43B007E2B41 /* NetworkManager.swift in Sources */,
 				CAAA325D2B64089800469D32 /* HomeView.swift in Sources */,
 				CAAA325A2B63FF9E00469D32 /* NavigationViewModel.swift in Sources */,
 				CA79248D2B63D94B00EA32A9 /* CustomTab+Navigation.swift in Sources */,
 				CA79248F2B63DD4000EA32A9 /* SignInView.swift in Sources */,
+				CA7DBC842B64C754007E2B41 /* DetailsViewModel.swift in Sources */,
 				CAAA32662B64109500469D32 /* QuizView.swift in Sources */,
 				CA79248B2B63D8E400EA32A9 /* AuthViewModel.swift in Sources */,
 				CA7924782B63C42500EA32A9 /* ContentView.swift in Sources */,
