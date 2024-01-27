@@ -19,6 +19,13 @@ struct PaywallView: View {
             if let product = paywallVM.products.first {
                 ScrollView {
                     HStack {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                        Spacer()
+                    }
+                    .padding()
+                    HStack {
                         Text("👑 " + product.displayName + " " + product.description)
                             .font(.headline)
                             .multilineTextAlignment(.center)
@@ -48,6 +55,14 @@ struct PaywallView: View {
                 } label: {
                     if isEligibleForOffer {
                         Text("Start your monthly Trial")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .fill(Color.accentColor.gradient)
+                            )
+
                     } else {
                         Text("Continue for \(product.displayPrice)")
                             .font(.headline)
@@ -69,16 +84,9 @@ struct PaywallView: View {
                 dismiss()
             }
         })
-        .task(priority: .background, {
-            isEligibleForOffer = await paywallVM.isEligibleForFreeTrial()
+        .task(priority: .high, {
+            self.isEligibleForOffer = await paywallVM.isEligibleForFreeTrial()
         })
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-        }
         .presentationDetents([.medium])
     }
 }
