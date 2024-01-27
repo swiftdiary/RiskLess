@@ -10,8 +10,8 @@ import Foundation
 // /organisations/<ticker>
 
 struct Organization_Detailed: Codable {
-    var financialIndicators: [FinancialIndicator]
-    var orgInfo: OrgInfo
+    let financialIndicators: FinancialIndicator
+    let orgInfo: OrgInfo
     
     enum CodingKeys: String, CodingKey {
         case financialIndicators = "financial_indicators"
@@ -20,8 +20,63 @@ struct Organization_Detailed: Codable {
 }
 
 struct FinancialIndicator: Codable {
-    
+    let results: [FinancialResult]
+
+    struct FinancialResult: Identifiable, Codable {
+        let id = UUID()
+        let reportingYear: Int
+        let totalAssets: Double
+        let totalEquity: Double
+        let returnOnAssets: Double
+        let returnOnEquity: Double
+        let combinedOperatingRatio: CombinedOperatingRatio
+        let netProfit: Double
+        let netRevenue: Double
+        let totalLiabilities: Double
+
+        private enum CodingKeys: String, CodingKey {
+            case reportingYear = "reporting_year"
+            case totalAssets = "total_assets"
+            case totalEquity = "total_equity"
+            case returnOnAssets = "return_on_assets"
+            case returnOnEquity = "return_on_equity"
+            case combinedOperatingRatio = "combined_operating_ratio"
+            case netProfit = "net_profit"
+            case netRevenue = "net_revenue"
+            case totalLiabilities = "total_liabilities"
+        }
+    }
+
+    enum CombinedOperatingRatio: Codable {
+        case value(Double)
+        case string(String)
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            if let value = try? container.decode(Double.self) {
+                self = .value(value)
+            } else if let string = try? container.decode(String.self) {
+                self = .string(string)
+            } else {
+                throw DecodingError.dataCorruptedError(
+                    in: container,
+                    debugDescription: "Unable to decode CombinedOperatingRatio"
+                )
+            }
+        }
+
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.singleValueContainer()
+            switch self {
+            case .value(let value):
+                try container.encode(value)
+            case .string(let string):
+                try container.encode(string)
+            }
+        }
+    }
 }
+
 
 struct OrgInfo: Codable {
     let id: Int
