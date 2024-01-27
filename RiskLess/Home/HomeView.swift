@@ -27,10 +27,7 @@ struct HomeView: View {
                 // Handle error
             }
         }
-        .background(Color.lightGreen)
         .navigationTitle("Home")
-        .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarBackground(Color.lightGreen, for: .navigationBar)
     }
     
     @ViewBuilder
@@ -118,7 +115,7 @@ struct HomeView: View {
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 25.0)
-                .fill(.background)
+                .fill(.themeBackground.opacity(0.7))
         )
     }
 }

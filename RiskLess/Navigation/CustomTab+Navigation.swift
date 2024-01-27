@@ -39,6 +39,7 @@ struct CustomTab_Navigation: View {
                                     Circle()
                                         .fill(Color.accentColor)
                                         .frame(width: 8, height: 8)
+                                        .matchedGeometryEffect(id: "TabBarItem", in: namespace)
                                 }
                             }
                             .padding(.vertical, 10)
@@ -47,7 +48,7 @@ struct CustomTab_Navigation: View {
                                 if selection == option {
                                     RoundedRectangle(cornerRadius: 25.0)
                                         .fill(Color.accentColor.gradient.opacity(0.15))
-                                        .matchedGeometryEffect(id: "TabBarItem", in: namespace)
+                                        
                                 } else {
                                     EmptyView()
                                 }
