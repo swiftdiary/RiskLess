@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct FavoritesView: View {
+    
     @StateObject private var favoritesVM = FavoritesViewModel()
     
     var body: some View {
         VStack {
             List {
-                Text("List Of Favorites!!!!!")
+                
             }
         }
         .navigationTitle("Favorites")

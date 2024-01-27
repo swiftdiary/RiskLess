@@ -73,7 +73,7 @@ final class PaywallViewModel: ObservableObject {
             //Filter the products into categories based on their type.
             for product in storeProducts {
                 switch product.type {
-                case .nonConsumable:
+                case .autoRenewable:
                     newProducts.append(product)
                 default:
                     //Ignore this product.
@@ -87,6 +87,7 @@ final class PaywallViewModel: ObservableObject {
         }
     }
     
+    @discardableResult
     func purchase(_ product: Product) async throws -> Transaction? {
         await MainActor.run { [weak self] in
             self?.purchasing = true
@@ -152,7 +153,7 @@ final class PaywallViewModel: ObservableObject {
     func isPurchased(_ product: Product) async throws -> Bool {
         //Determine whether the user purchases a given product.
         switch product.type {
-        case .nonConsumable:
+        case .autoRenewable:
             return purchased.contains(product)
         default:
             return false
@@ -169,6 +170,12 @@ final class PaywallViewModel: ObservableObject {
             //The result is verified. Return the unwrapped value.
             return safe
         }
+    }
+    
+    func isEligibleForFreeTrial() async -> Bool {
+        guard let product = products.first else { return false }
+        guard let subscription = product.subscription else { return false }
+        return await subscription.isEligibleForIntroOffer
     }
     
 }

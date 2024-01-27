@@ -22,6 +22,9 @@
 		CA7DBC8B2B65003A007E2B41 /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7DBC8A2B65003A007E2B41 /* Organization.swift */; };
 		CA7DBC8E2B651585007E2B41 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7DBC8D2B651585007E2B41 /* PaywallView.swift */; };
 		CA7DBC902B65158E007E2B41 /* PaywallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7DBC8F2B65158E007E2B41 /* PaywallViewModel.swift */; };
+		CA7DBC932B651798007E2B41 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7DBC922B651798007E2B41 /* StoreKit.framework */; };
+		CA7DBC952B6518F6007E2B41 /* Products.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CA7DBC942B6518F6007E2B41 /* Products.storekit */; };
+		CA7DBC972B651942007E2B41 /* Products.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA7DBC962B651942007E2B41 /* Products.plist */; };
 		CAAA325A2B63FF9E00469D32 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA32592B63FF9E00469D32 /* NavigationViewModel.swift */; };
 		CAAA325D2B64089800469D32 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA325C2B64089800469D32 /* HomeView.swift */; };
 		CAAA32602B6408AB00469D32 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA325F2B6408AB00469D32 /* FavoritesView.swift */; };
@@ -52,6 +55,9 @@
 		CA7DBC8A2B65003A007E2B41 /* Organization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
 		CA7DBC8D2B651585007E2B41 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		CA7DBC8F2B65158E007E2B41 /* PaywallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallViewModel.swift; sourceTree = "<group>"; };
+		CA7DBC922B651798007E2B41 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CA7DBC942B6518F6007E2B41 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
+		CA7DBC962B651942007E2B41 /* Products.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Products.plist; sourceTree = "<group>"; };
 		CAAA32592B63FF9E00469D32 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CAAA325C2B64089800469D32 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CAAA325F2B6408AB00469D32 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
@@ -70,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA7DBC932B651798007E2B41 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +88,7 @@
 			children = (
 				CA7924742B63C42500EA32A9 /* RiskLess */,
 				CA7924732B63C42500EA32A9 /* Products */,
+				CA7DBC912B651798007E2B41 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +105,8 @@
 			children = (
 				CA7924752B63C42500EA32A9 /* RiskLessApp.swift */,
 				CA7924772B63C42500EA32A9 /* ContentView.swift */,
+				CA7DBC962B651942007E2B41 /* Products.plist */,
+				CA7DBC942B6518F6007E2B41 /* Products.storekit */,
 				CA7DBC8C2B651578007E2B41 /* Paywall */,
 				CA7DBC892B64FFE8007E2B41 /* Organization */,
 				CA7DBC852B64E42F007E2B41 /* Network */,
@@ -182,6 +192,14 @@
 				CA7DBC8F2B65158E007E2B41 /* PaywallViewModel.swift */,
 			);
 			path = Paywall;
+			sourceTree = "<group>";
+		};
+		CA7DBC912B651798007E2B41 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA7DBC922B651798007E2B41 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CAAA325B2B64088C00469D32 /* Home */ = {
@@ -287,7 +305,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA7DBC972B651942007E2B41 /* Products.plist in Resources */,
 				CA79247D2B63C42700EA32A9 /* Preview Assets.xcassets in Resources */,
+				CA7DBC952B6518F6007E2B41 /* Products.storekit in Resources */,
 				CA79247A2B63C42700EA32A9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

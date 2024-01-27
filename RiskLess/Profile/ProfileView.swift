@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     @AppStorage("is_signed_in") private var isSignedIn: Bool = false
     @AppStorage("is_quiz_passed") private var isQuizPassed: Bool = false
+    @AppStorage("is_premium") private var isPremium: Bool = false
+    @State private var showPaywall: Bool = false
     
     @StateObject private var profileVM = ProfileViewModel()
     
@@ -21,6 +23,11 @@ struct ProfileView: View {
                         Text("Name:")
                         Text("Akbar")
                             .font(.headline)
+                    }
+                    Button("👑 Premium") {
+                        if !isPremium {
+                            showPaywall.toggle()
+                        }
                     }
                 }
                 Section {
@@ -34,6 +41,9 @@ struct ProfileView: View {
                 }
             }
         }
+        .sheet(isPresented: $showPaywall, content: {
+            PaywallView()
+        })
         .navigationTitle("Profile")
     }
 }
