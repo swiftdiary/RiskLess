@@ -20,6 +20,7 @@ struct CustomTab_Navigation: View {
                         option.view
                             .navigationDestination(for: NavigationOption.self) { $0.destination.environmentObject(navigationVM) }
                     }
+                    .toolbar(.hidden, for: .tabBar)
                 }
             })
             ZStack {
