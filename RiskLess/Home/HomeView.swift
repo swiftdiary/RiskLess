@@ -24,9 +24,9 @@ struct HomeView: View {
                     .padding(.top)
                     ScrollView(.horizontal) {
                         HStack {
-                            ForEach(0..<5) { _ in
+                            ForEach(homeVM.organisations) { org in
                                 VStack {
-                                    
+                                    Text("Name: \(org.shortName)")
                                 }
                                 .frame(width: 250, height: 150)
                                 .background(
@@ -66,6 +66,13 @@ struct HomeView: View {
                             .fill(.background)
                     )
                 }
+            }
+        }
+        .task {
+            do {
+                try await homeVM.getOrganisations()
+            } catch {
+                // Handle error
             }
         }
         .background(Color.lightGreen)
