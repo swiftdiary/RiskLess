@@ -26,7 +26,7 @@ struct CategoriesView: View {
                 print(error)
             }
         }
-        .navigationTitle("\(categoryName.capitalized)")
+        .navigationTitle("\(categoryName.uppercased())S")
         .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -44,21 +44,6 @@ struct CategoriesView: View {
                             .font(.headline)
                     }
                     Spacer()
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "star")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20)
-                            .font(.headline)
-                            .padding(6)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10.0)
-                                    .fill(Color.accentColor.opacity(0.25))
-                            )
-                    }
-                    .foregroundStyle(.accent)
                 }
                 .padding()
                 .background(
