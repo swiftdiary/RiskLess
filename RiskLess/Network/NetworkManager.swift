@@ -15,9 +15,9 @@ final class NetworkManager {
     
     private var defaultHeaders: [String: String] {
         var headers: [String: String] = [:]
-        if let token = userDefaults.string(forKey: "sign_in_token"), !token.isEmpty {
-            headers["Authorization"] = "Bearer \(token)"
-        }
+//        if let token = userDefaults.string(forKey: "sign_in_token"), !token.isEmpty {
+//            headers["Authorization"] = "Bearer \(token)"
+//        }
         return headers
     }
     
