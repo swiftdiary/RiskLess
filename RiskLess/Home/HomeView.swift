@@ -24,7 +24,7 @@ struct HomeView: View {
             do {
                 try await homeVM.getOrganisations()
             } catch {
-                // Handle error
+                print(error)
             }
         }
         .navigationTitle("Home")
@@ -37,23 +37,40 @@ struct HomeView: View {
                 Text("Top 5 companies")
                     .font(.headline)
                 Spacer()
-                Text("By quarter income")
             }
             .padding(.horizontal)
             .padding(.top)
             ScrollView(.horizontal) {
                 HStack {
-                    ForEach(homeVM.organisations) { org in
-                        VStack {
-                            Text("Name: \(org.shortName)")
+                    if homeVM.organisations.isEmpty {
+                        ProgressView()
+                            .frame(height: 150)
+                    } else {
+                        ForEach(homeVM.organisations) { org in
+                            HStack(spacing: 10) {
+                                Image(.banks)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(maxWidth: .infinity)
+                                VStack(alignment: .leading, spacing: 10) {
+                                    Text("\(org.shortName ?? "")")
+                                        .font(.headline)
+                                    Text("\(org.email ?? "")")
+                                        .font(.caption)
+                                    Text("\(org.phone ?? "")")
+                                        .font(.caption2)
+                                }
+                                .frame(maxWidth: .infinity)
+                            }
+                            .frame(width: 250, height: 150)
+                            .padding(10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 25.0)
+                                    .fill(Color.accentColor.opacity(0.3).gradient)
+                            )
+                            .padding(.horizontal)
+                            .padding(.bottom)
                         }
-                        .frame(width: 250, height: 150)
-                        .background(
-                            RoundedRectangle(cornerRadius: 25.0)
-                                .fill(Color.accentColor.gradient)
-                        )
-                        .padding(.horizontal)
-                        .padding(.bottom)
                     }
                 }
             }
@@ -79,7 +96,7 @@ struct HomeView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
-                NavigationLink(value: NavigationOption.categories("banks")) {
+                NavigationLink(value: NavigationOption.categories("bank")) {
                     VStack {
                         Image(.banks)
                             .resizable()

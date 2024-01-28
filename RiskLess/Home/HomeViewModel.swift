@@ -10,9 +10,12 @@ import SwiftUI
 final class HomeViewModel: ObservableObject {
     @Published var organisations = [OrganizationData]()
 
-    
     func getOrganisations() async throws {
-        print("HEADERS TOKEN: \(UserDefaults.standard.string(forKey: "sign_in_token") ?? "No token")")
+        
+        let response = try await NetworkManager.shared.get("/organisations", queries: ["org_type" : "bank"], asType: Organization.self)
+        await MainActor.run {
+            self.organisations = response.data
+        }
     }
 }
 

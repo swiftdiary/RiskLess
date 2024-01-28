@@ -10,8 +10,8 @@ import Foundation
 // /organisations/<ticker>
 
 struct Organization_Detailed: Codable {
-    let financialIndicators: FinancialIndicator
-    let orgInfo: OrgInfo
+    let financialIndicators: FinancialIndicator?
+    let orgInfo: OrgInfo?
     
     enum CodingKeys: String, CodingKey {
         case financialIndicators = "financial_indicators"
@@ -20,19 +20,19 @@ struct Organization_Detailed: Codable {
 }
 
 struct FinancialIndicator: Codable {
-    let results: [FinancialResult]
+    let results: [FinancialResult]?
 
     struct FinancialResult: Identifiable, Codable {
         let id = UUID()
-        let reportingYear: Int
-        let totalAssets: Double
-        let totalEquity: Double
-        let returnOnAssets: Double
-        let returnOnEquity: Double
-        let combinedOperatingRatio: CombinedOperatingRatio
-        let netProfit: Double
-        let netRevenue: Double
-        let totalLiabilities: Double
+        let reportingYear: Int?
+        let totalAssets: Double?
+        let totalEquity: Double?
+        let returnOnAssets: Double?
+        let returnOnEquity: Double?
+        let combinedOperatingRatio: CombinedOperatingRatio?
+        let netProfit: Double?
+        let netRevenue: Double?
+        let totalLiabilities: Double?
 
         private enum CodingKeys: String, CodingKey {
             case reportingYear = "reporting_year"
@@ -80,29 +80,29 @@ struct FinancialIndicator: Codable {
 
 struct OrgInfo: Codable {
     let id: Int
-    let detailInfo: DetailInfo
-    let infoRfb: InfoRfb
-    let inn: Int
-    let fullNameText: String
-    let shortNameText: String
-    let exchangeTicketName: String
-    let location: String
-    let address: String
-    let email: String
-    let webSite: String
-    let status: Bool
-    let nameSuffixId: Int
-    let responsiblePersonId: Int
-    let accountNumber: String
-    let govRegNumber: String
-    let kfs: Int
-    let mfo: String
-    let okonx: Int
-    let okpo: Int
-    let servingBank: String
-    let soato: Int
-    let onMaps: String
-    let region: String
+    let detailInfo: DetailInfo?
+    let infoRfb: InfoRfb?
+    let inn: Int?
+    let fullNameText: String?
+    let shortNameText: String?
+    let exchangeTicketName: String?
+    let location: String?
+    let address: String?
+    let email: String?
+    let webSite: String?
+    let status: Bool?
+    let nameSuffixId: Int?
+    let responsiblePersonId: Int?
+    let accountNumber: String?
+    let govRegNumber: String?
+    let kfs: Int?
+    let mfo: String?
+    let okonx: Int?
+    let okpo: Int?
+    let servingBank: String?
+    let soato: Int?
+    let onMaps: String?
+    let region: String?
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -134,16 +134,16 @@ struct OrgInfo: Codable {
 
 struct DetailInfo: Codable {
     let id: Int
-    let shortInfoRu: String
-    let shortInfoUz: String
-    let shortInfoEn: String
-    let directorName: String
-    let review: String
-    let phoneNumber: String
-    let logoFile: String
-    let updatedAt: String
-    let createdAt: String
-    let organization: Int
+    let shortInfoRu: String?
+    let shortInfoUz: String?
+    let shortInfoEn: String?
+    let directorName: String?
+    let review: String?
+    let phoneNumber: String?
+    let logoFile: String?
+    let updatedAt: String?
+    let createdAt: String?
+    let organization: Int?
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -161,10 +161,10 @@ struct DetailInfo: Codable {
 }
 
 struct InfoRfb: Codable {
-    let statusRfb: Bool
-    let isinCodes: [IsinCode]
-    let ustavCapitalization: Double
-    let defaultIsuCd: String
+    let statusRfb: Bool?
+    let isinCodes: [IsinCode]?
+    let ustavCapitalization: Double?
+    let defaultIsuCd: String?
 
     private enum CodingKeys: String, CodingKey {
         case statusRfb = "status_rfb"
@@ -175,14 +175,14 @@ struct InfoRfb: Codable {
 }
 
 struct IsinCode: Codable {
-    let isuCd: String
-    let market: String
-    let ticker: String
-    let issuerShortName: String
-    let listingDate: String
-    let tradingCurrency: String
-    let price: Double
-    let stockType: String
+    let isuCd: String?
+    let market: String?
+    let ticker: String?
+    let issuerShortName: String?
+    let listingDate: String?
+    let tradingCurrency: String?
+    let price: Double?
+    let stockType: String?
 
     private enum CodingKeys: String, CodingKey {
         case isuCd

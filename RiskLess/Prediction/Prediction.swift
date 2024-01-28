@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Prediction: Codable {
+struct Prediction: Identifiable, Codable {
+    let id = UUID()
     var envScore: Float
     var socScore: Float
     var govScore: Float

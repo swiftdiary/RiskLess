@@ -15,12 +15,12 @@ struct Organization: Codable {
 
 struct OrganizationData: Identifiable, Codable {
     var id: Int
-    var address: String
-    var director: String
-    var email: String
-    var phone: String
-    var shortName: String
-    var ticker: String
+    var address: String?
+    var director: String?
+    var email: String?
+    var phone: String?
+    var shortName: String?
+    var ticker: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "org_id"
@@ -35,23 +35,23 @@ struct OrganizationData: Identifiable, Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try values.decode(Int.self, forKey: .id)
-        self.address = try values.decode(String.self, forKey: .address)
-        self.director = try values.decode(String.self, forKey: .director)
-        self.email = try values.decode(String.self, forKey: .email)
-        self.phone = try values.decode(String.self, forKey: .phone)
-        self.shortName = try values.decode(String.self, forKey: .shortName)
-        self.ticker = try values.decode(String.self, forKey: .ticker)
+        self.address = try values.decodeIfPresent(String.self, forKey: .address)
+        self.director = try values.decodeIfPresent(String.self, forKey: .director)
+        self.email = try values.decodeIfPresent(String.self, forKey: .email)
+        self.phone = try values.decodeIfPresent(String.self, forKey: .phone)
+        self.shortName = try values.decodeIfPresent(String.self, forKey: .shortName)
+        self.ticker = try values.decodeIfPresent(String.self, forKey: .ticker)
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.id, forKey: .id)
-        try container.encode(self.address, forKey: .address)
-        try container.encode(self.director, forKey: .director)
-        try container.encode(self.email, forKey: .email)
-        try container.encode(self.phone, forKey: .phone)
-        try container.encode(self.shortName, forKey: .shortName)
-        try container.encode(self.ticker, forKey: .ticker)
+        try container.encodeIfPresent(self.address, forKey: .address)
+        try container.encodeIfPresent(self.director, forKey: .director)
+        try container.encodeIfPresent(self.email, forKey: .email)
+        try container.encodeIfPresent(self.phone, forKey: .phone)
+        try container.encodeIfPresent(self.shortName, forKey: .shortName)
+        try container.encodeIfPresent(self.ticker, forKey: .ticker)
     }
     
 }

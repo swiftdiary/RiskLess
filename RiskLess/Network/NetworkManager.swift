@@ -15,9 +15,10 @@ final class NetworkManager {
     
     private var defaultHeaders: [String: String] {
         var headers: [String: String] = [:]
-//        if let token = userDefaults.string(forKey: "sign_in_token"), !token.isEmpty {
-//            headers["Authorization"] = "Bearer \(token)"
-//        }
+        if let token = userDefaults.string(forKey: "sign_in_token"), !token.isEmpty {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        print(headers)
         return headers
     }
     
@@ -75,6 +76,10 @@ final class NetworkManager {
         guard let responseData = data else {
             throw NetworkError.invalidData
         }
+        
+        if let dictResponse = try? JSONSerialization.jsonObject(with: responseData, options: []) as? [String : Any] {
+            print("Dict Resp: \(dictResponse)")
+        }
 
         do {
             if let responseType = asType {
@@ -92,7 +97,7 @@ final class NetworkManager {
         let url = createURL(path: path, queries: queries)
         var request = createRequest(url: url, method: method, jsonBody: jsonBody)
         configureRequest(request: &request, asType: asType)
-
+        
         let (data, response) = try await URLSession.shared.data(for: request)
         return try handleResponse(data: data, response: response, error: nil, asType: asType)
     }

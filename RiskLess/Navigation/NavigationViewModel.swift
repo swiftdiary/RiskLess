@@ -42,14 +42,12 @@ enum NavigationOption: Hashable {
 
 enum TabBarOption: Hashable, CaseIterable {
     case home
-    case favorites
     case profile
     
     @ViewBuilder
     var view: some View {
         switch self {
         case .home: HomeView().tag(self)
-        case .favorites: FavoritesView().tag(self)
         case .profile: ProfileView().tag(self)
         }
     }
@@ -57,7 +55,6 @@ enum TabBarOption: Hashable, CaseIterable {
     var iconName: String {
         switch self {
         case .home: "house.circle"
-        case .favorites: "star.circle"
         case .profile: "person.crop.circle"
         }
     }

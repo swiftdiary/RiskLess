@@ -19,9 +19,41 @@ struct DetailsView: View {
             ScrollView {
                 Header()
                 BodySection()
-                TableSection()
+//                TableSection()
+                QuickAnalysis()
             }
         }
+        .sheet(item: $detailsVM.prediction, onDismiss: {
+            print("Dismissed")
+        }, content: { prediction in
+            VStack(alignment: .leading, spacing: 15) {
+                VStack(alignment: .leading) {
+                    Text("TOTAL SCORE: \(String(format: "%.2f", (prediction.envScore + prediction.socScore + prediction.govScore)))")
+                        .font(.title2.bold())
+                    Text("Total ESG Risk Score - a comprehensive assessment that quantifies the Environmental, Social, and Governance (ESG) risks associated with an investment or a company, considering factors such as environmental impact, social responsibility, and governance practices.")
+                }
+                Divider()
+                VStack(alignment: .leading) {
+                    Text("ENV SCORE: \(String(format: "%.2f", prediction.envScore))")
+                        .bold()
+                    Text("Environment Risk Score - a metric used to evaluate the potential environmental risks and impacts associated with an investment, company, or project, assessing factors such as pollution, resource usage, and climate change vulnerabilities.")
+                }
+                Divider()
+                VStack(alignment: .leading) {
+                    Text("SOC SCORE: \(String(format: "%.2f", prediction.socScore))")
+                        .bold()
+                    Text("Social Risk Score - a metric used to evaluate the potential social impact and risks associated with an investment or company, focusing on factors such as labor practices, community relations, diversity and inclusion, and human rights considerations.")
+                }
+                Divider()
+                VStack(alignment: .leading) {
+                    Text("GOV SCORE: \(String(format: "%.2f", prediction.govScore))")
+                        .bold()
+                    Text("Government Risk Score - a measurement used to assess the level of political and regulatory risks inherent in an investment or company, considering factors such as government stability, legal framework, political transparency, and regulatory environment.")
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+        })
         .task {
             do {
                 try await detailsVM.getOrganization(ticker: ticker)
@@ -29,7 +61,7 @@ struct DetailsView: View {
                 print(error)
             }
         }
-        .navigationTitle("\(ticker.capitalized)")
+        .navigationTitle("\(ticker.uppercased())")
         .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -44,11 +76,11 @@ struct DetailsView: View {
                 }
                 .frame(maxWidth: .infinity)
                 VStack(alignment: .leading, spacing: 20) {
-                    Text(organization.orgInfo.shortNameText)
-                        .font(.title2.bold())
-                    Text(organization.orgInfo.fullNameText)
+                    Text(organization.orgInfo?.shortNameText ?? "")
+                        .font(.title3.bold())
+                    Text(organization.orgInfo?.fullNameText ?? "")
                         .font(.caption)
-                    Text("TIN: \(organization.orgInfo.inn)")
+                    Text("TIN: \(organization.orgInfo?.inn ?? 0)")
                         .font(.subheadline)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -66,7 +98,7 @@ struct DetailsView: View {
     
     @ViewBuilder
     func BodySection() -> some View {
-        if let organization = detailsVM.organization {
+        if detailsVM.organization != nil {
             VStack(alignment: .leading) {
                 HStack {
                     Text("Financial Indicators")
@@ -83,16 +115,18 @@ struct DetailsView: View {
                 }
                 Chart {
                     ForEach(detailsVM.financialIndicatorResults) { result in
-                        if currentChartMarkType == "bar" {
-                            BarMark(
-                                x: .value("Year", result.reportingYear),
-                                y: .value("So'm", currentType == "total_assets" ? result.totalAssets : result.totalEquity)
-                            )
-                        } else {
-                            LineMark(
-                                x: .value("Year", result.reportingYear),
-                                y: .value("So'm", currentType == "total_assets" ? result.totalAssets : result.totalEquity)
-                            )
+                        if let reportingYear = result.reportingYear, let totalAssets = result.totalAssets, let totalEquity = result.totalEquity {
+                            if currentChartMarkType == "bar" {
+                                BarMark(
+                                    x: .value("Year", reportingYear.description),
+                                    y: .value("So'm", currentType == "total_assets" ? totalAssets : totalEquity)
+                                )
+                            } else {
+                                LineMark(
+                                    x: .value("Year", reportingYear.description),
+                                    y: .value("So'm", currentType == "total_assets" ? totalAssets : totalEquity)
+                                )
+                            }
                         }
                     }
                 }
@@ -116,11 +150,35 @@ struct DetailsView: View {
     
     @ViewBuilder
     func TableSection() -> some View {
-        if let organization = detailsVM.organization {
+        if detailsVM.organization != nil {
             Text("Here will be a table section...")
         } else {
             ProfileView()
         }
+    }
+    
+    @ViewBuilder
+    func QuickAnalysis() -> some View {
+        HStack {
+            Button("Quick Analysis") {
+                Task {
+                    do {
+                        try await detailsVM.quickAnalysis(ticker: ticker)
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 10)
+            .font(.headline)
+            .foregroundStyle(.background)
+            .background(
+                RoundedRectangle(cornerRadius: 10.0)
+                    .fill(Color.accentColor.gradient)
+            )
+        }
+        .padding()
     }
 }
 
@@ -129,3 +187,4 @@ struct DetailsView: View {
         DetailsView(ticker: "1")
     }
 }
+

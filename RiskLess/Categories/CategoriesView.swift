@@ -32,42 +32,46 @@ struct CategoriesView: View {
     
     @ViewBuilder
     func OrganizationRow(organization: OrganizationData) -> some View {
-        NavigationLink(value: NavigationOption.details(organization.ticker)) {
-            HStack {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(organization.shortName)
-                        .font(.headline)
-                    Text("\(organization.address), \(organization.email), \(organization.phone)")
-                        .font(.caption)
-                    Text("Director: \(organization.director)")
-                        .font(.headline)
+        if let ticker = organization.ticker {
+            NavigationLink(value: NavigationOption.details(ticker)) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(organization.shortName ?? "")
+                            .font(.headline)
+                        Text("\(organization.address ?? ""), \(organization.email ?? ""), \(organization.phone ?? "")")
+                            .font(.caption)
+                        Text("Director: \(organization.director ?? "")")
+                            .font(.headline)
+                    }
+                    Spacer()
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "star")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .font(.headline)
+                            .padding(6)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .fill(Color.accentColor.opacity(0.25))
+                            )
+                    }
+                    .foregroundStyle(.accent)
                 }
-                Spacer()
-                Button {
-                    
-                } label: {
-                    Image(systemName: "star")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20, height: 20)
-                        .font(.headline)
-                        .padding(6)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10.0)
-                                .fill(Color.accentColor.opacity(0.25))
-                        )
-                }
-                .foregroundStyle(.accent)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10.0)
+                        .stroke(lineWidth: 0.2)
+                        .foregroundStyle(.primary)
+                )
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .shadow(radius: 5.0)
             }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 10.0)
-                    .stroke(lineWidth: 0.2)
-                    .foregroundStyle(.primary)
-            )
-            .padding(.horizontal, 10)
-            .padding(.vertical, 5)
-            .shadow(radius: 5.0)
+        } else {
+            Text("There is no Ticker!")
         }
     }
 }
