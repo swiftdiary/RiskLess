@@ -26,33 +26,73 @@ struct DetailsView: View {
         .sheet(item: $detailsVM.prediction, onDismiss: {
             print("Dismissed")
         }, content: { prediction in
-            VStack(alignment: .leading, spacing: 15) {
-                VStack(alignment: .leading) {
-                    Text("TOTAL SCORE: \(String(format: "%.2f", (prediction.envScore + prediction.socScore + prediction.govScore)))")
-                        .font(.title2.bold())
-                    Text("Total ESG Risk Score - a comprehensive assessment that quantifies the Environmental, Social, and Governance (ESG) risks associated with an investment or a company, considering factors such as environmental impact, social responsibility, and governance practices.")
+            ScrollView {
+                VStack(alignment: .leading, spacing: 15) {
+                    VStack(alignment: .leading) {
+                        Text("TOTAL SCORE: \(String(format: "%.2f", (prediction.envScore + prediction.socScore + prediction.govScore)))")
+                            .font(.title2.bold())
+                        Text("Total ESG Risk Score - a comprehensive assessment that quantifies the Environmental, Social, and Governance (ESG) risks associated with an investment or a company, considering factors such as environmental impact, social responsibility, and governance practices.")
+                            .font(.caption)
+                    }
+                    .padding()
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("ENV SCORE: \(String(format: "%.2f", prediction.envScore))")
+                            .bold()
+                        Text("Environment Risk Score - a metric used to evaluate the potential environmental risks and impacts associated with an investment, company, or project, assessing factors such as pollution, resource usage, and climate change vulnerabilities.")
+                            .font(.caption)
+                    }
+                    .padding()
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("SOC SCORE: \(String(format: "%.2f", prediction.socScore))")
+                            .bold()
+                        Text("Social Risk Score - a metric used to evaluate the potential social impact and risks associated with an investment or company, focusing on factors such as labor practices, community relations, diversity and inclusion, and human rights considerations.")
+                            .font(.caption)
+                    }
+                    .padding()
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("GOV SCORE: \(String(format: "%.2f", prediction.govScore))")
+                            .bold()
+                        Text("Government Risk Score - a measurement used to assess the level of political and regulatory risks inherent in an investment or company, considering factors such as government stability, legal framework, political transparency, and regulatory environment.")
+                            .font(.caption)
+                    }
+                    .padding()
+                    if detailsVM.loading {
+                        ProgressView()
+                    }
+                    if let gptResponse = detailsVM.gptResponse {
+                        VStack(alignment: .leading) {
+                            Text("GPT Response:").bold()
+                            Text("\(gptResponse)")
+                                .font(.caption)
+                        }
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10.0)
+                                .fill(Color.green.opacity(0.3))
+                        )
+                        .padding()
+                    }
+                    HStack {
+                        Button("AI Suggestion") {
+                            detailsVM.aiSuggestionRequest(prediction: prediction, company: ticker)
+                        }
+                        .font(.headline)
+                        .foregroundStyle(.background)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 45)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10.0)
+                                .fill(detailsVM.gptResponse != nil || detailsVM.loading ? Color.gray.gradient : Color.accentColor.gradient)
+                        )
+                        .disabled(detailsVM.gptResponse != nil || detailsVM.loading)
+                    }
+                    .padding()
                 }
-                Divider()
-                VStack(alignment: .leading) {
-                    Text("ENV SCORE: \(String(format: "%.2f", prediction.envScore))")
-                        .bold()
-                    Text("Environment Risk Score - a metric used to evaluate the potential environmental risks and impacts associated with an investment, company, or project, assessing factors such as pollution, resource usage, and climate change vulnerabilities.")
-                }
-                Divider()
-                VStack(alignment: .leading) {
-                    Text("SOC SCORE: \(String(format: "%.2f", prediction.socScore))")
-                        .bold()
-                    Text("Social Risk Score - a metric used to evaluate the potential social impact and risks associated with an investment or company, focusing on factors such as labor practices, community relations, diversity and inclusion, and human rights considerations.")
-                }
-                Divider()
-                VStack(alignment: .leading) {
-                    Text("GOV SCORE: \(String(format: "%.2f", prediction.govScore))")
-                        .bold()
-                    Text("Government Risk Score - a measurement used to assess the level of political and regulatory risks inherent in an investment or company, considering factors such as government stability, legal framework, political transparency, and regulatory environment.")
-                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
         })
         .task {
             do {

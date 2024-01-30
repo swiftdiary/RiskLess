@@ -17,6 +17,8 @@ struct HomeView: View {
                     TopOrganizations()
                     
                     AllCategories()
+                    
+                    HStack{}.frame(minHeight: 200)
                 }
             }
         }
@@ -34,7 +36,7 @@ struct HomeView: View {
     func TopOrganizations() -> some View {
         Group {
             HStack {
-                Text("Top 5 companies")
+                Text("Top companies")
                     .font(.headline)
                 Spacer()
             }
@@ -47,29 +49,32 @@ struct HomeView: View {
                             .frame(height: 150)
                     } else {
                         ForEach(homeVM.organisations) { org in
-                            HStack(spacing: 10) {
-                                Image(.banks)
-                                    .resizable()
-                                    .scaledToFit()
+                            NavigationLink(value: NavigationOption.details(org.ticker ?? "HMKB")) {
+                                HStack(spacing: 10) {
+                                    Image(.banks)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(maxWidth: .infinity)
+                                    VStack(alignment: .leading, spacing: 10) {
+                                        Text("\(org.shortName ?? "")")
+                                            .font(.headline)
+                                        Text("\(org.email ?? "")")
+                                            .font(.caption)
+                                        Text("\(org.phone ?? "")")
+                                            .font(.caption2)
+                                    }
                                     .frame(maxWidth: .infinity)
-                                VStack(alignment: .leading, spacing: 10) {
-                                    Text("\(org.shortName ?? "")")
-                                        .font(.headline)
-                                    Text("\(org.email ?? "")")
-                                        .font(.caption)
-                                    Text("\(org.phone ?? "")")
-                                        .font(.caption2)
                                 }
-                                .frame(maxWidth: .infinity)
+                                .frame(width: 250, height: 150)
+                                .padding(10)
+                                .foregroundStyle(.primary)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 25.0)
+                                        .fill(Color.accentColor.opacity(0.3).gradient)
+                                )
+                                .padding(.horizontal)
+                                .padding(.bottom)
                             }
-                            .frame(width: 250, height: 150)
-                            .padding(10)
-                            .background(
-                                RoundedRectangle(cornerRadius: 25.0)
-                                    .fill(Color.accentColor.opacity(0.3).gradient)
-                            )
-                            .padding(.horizontal)
-                            .padding(.bottom)
                         }
                     }
                 }

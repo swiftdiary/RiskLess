@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA23AEBC2B6927C70003C27D /* OpenAI+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA23AEBB2B6927C70003C27D /* OpenAI+Manager.swift */; };
 		CA7924762B63C42500EA32A9 /* RiskLessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7924752B63C42500EA32A9 /* RiskLessApp.swift */; };
 		CA7924782B63C42500EA32A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7924772B63C42500EA32A9 /* ContentView.swift */; };
 		CA79247A2B63C42700EA32A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA7924792B63C42700EA32A9 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA23AEBB2B6927C70003C27D /* OpenAI+Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAI+Manager.swift"; sourceTree = "<group>"; };
 		CA7924722B63C42500EA32A9 /* RiskLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RiskLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA7924752B63C42500EA32A9 /* RiskLessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskLessApp.swift; sourceTree = "<group>"; };
 		CA7924772B63C42500EA32A9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA23AEBA2B6927B60003C27D /* OpenAI */ = {
+			isa = PBXGroup;
+			children = (
+				CA23AEBB2B6927C70003C27D /* OpenAI+Manager.swift */,
+			);
+			path = OpenAI;
+			sourceTree = "<group>";
+		};
 		CA7924692B63C42500EA32A9 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +127,7 @@
 				CA7924772B63C42500EA32A9 /* ContentView.swift */,
 				CA7DBC962B651942007E2B41 /* Products.plist */,
 				CA7DBC942B6518F6007E2B41 /* Products.storekit */,
+				CA23AEBA2B6927B60003C27D /* OpenAI */,
 				CA7DBC9D2B65A590007E2B41 /* Tickers */,
 				CA7DBCA02B65AE61007E2B41 /* Prediction */,
 				CA7DBC892B64FFE8007E2B41 /* Organization */,
@@ -355,6 +366,7 @@
 				CA7DBC8B2B65003A007E2B41 /* Organization.swift in Sources */,
 				CAAA32602B6408AB00469D32 /* FavoritesView.swift in Sources */,
 				CA7DBCA22B65AE71007E2B41 /* Prediction.swift in Sources */,
+				CA23AEBC2B6927C70003C27D /* OpenAI+Manager.swift in Sources */,
 				CA7DBCA42B6617E8007E2B41 /* Organization+Top.swift in Sources */,
 				CA7DBC872B64E43B007E2B41 /* NetworkManager.swift in Sources */,
 				CAAA325D2B64089800469D32 /* HomeView.swift in Sources */,
