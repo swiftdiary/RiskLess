@@ -12,7 +12,7 @@ final class OpenAIManager {
     private init() { }
     
     func getPredictionResult(envScore: Float, socScore: Float, govScore: Float, company: String, completion: @escaping (String?, Error?) -> ()) {
-        let token = "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"
+        let token = "PASTE HERE OPEN AI TOKEN"
         guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
             print("Invalid URL")
             completion(nil, OpenAIManagerError.urlError)
@@ -26,7 +26,7 @@ final class OpenAIManager {
         let systemPrompt = "You are a financial specialist. And you know very well about Environmental Risk Score, Social Risk Score, Government Risk Score. When user provides you with these data you can explain users what it means in 3 sentences"
         let userPrompt = "Environmental Risk Score: \(envScore), Social Risk Score: \(socScore), Government Risk Score: \(govScore).\nThe company ticker is: \(company)"
         let jsonBody: [ String : Any ] = [
-            "model" : "gpt-4-turbo-preview",
+            "model" : "gpt-3.5-turbo",
             "messages" : [
                 [
                     "role" : "system",
@@ -67,6 +67,7 @@ final class OpenAIManager {
                 }
             } else {
                 print("Error: HTTP status code \(response.statusCode)")
+                print("Data: \(response.description)")
                 completion(nil, error)
             }
         }
